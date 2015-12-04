@@ -5,6 +5,8 @@ import re
 import os
 import time
 import random
+import string
+import fileinput
 from config_bot import *
 
 # Check that the file that contains our username exists
@@ -20,7 +22,7 @@ r = praw.Reddit(user_agent=user_agent)
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
-username = 'jaxtestingbot'
+
 user = r.get_redditor(username)
 #list of words
 hotwords = ["/u/"]
@@ -60,5 +62,8 @@ for comment in user.get_comments(limit=None):
         else:
             print ('nada')
             #print (random.choice(general_responses))
-            
-         
+print (final_name)
+print (username)
+for line in fileinput.FileInput("config_bot.py",inplace=1):
+    line = line.replace(username,final_name)
+print (username)
