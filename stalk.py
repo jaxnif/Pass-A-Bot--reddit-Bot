@@ -63,17 +63,4 @@ for comment in user.get_comments(limit=None):
         else:
             print ('nada')
             #print (random.choice(general_responses))
-print (final_name)
-print (username)
-def inplace_change("stalk.py", username, final_name):
-        s=open(stalk.py).read()
-        if username in s:
-                print ('Changing "{username}" to "{final_name}"'.format(**locals()))
-                s=s.replace(username, final_name)
-                f=open(stalk, 'w')
-                f.write(s)
-                f.flush()
-                f.close()
-        else:
-                print ('No occurances of "{username}" found.'.format(**locals()))
-print (username)
+username = final_name
