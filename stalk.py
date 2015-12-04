@@ -15,6 +15,7 @@ if not os.path.isfile("config_bot.py"):
     print ("Please see config_skel.py")
     exit(1)
 
+
 # Create the Reddit instance
 user_agent = ("PassABot v.4")
 r = praw.Reddit(user_agent=user_agent)
@@ -22,11 +23,11 @@ r = praw.Reddit(user_agent=user_agent)
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
-
+username = 'jaxtestingbot'
 user = r.get_redditor(username)
 #list of words
 hotwords = ["/u/"]
-
+print (username)
 #take responses.txt and turn it into a list
 with open('general_responses.txt') as f:
     general_responses = f.read().splitlines()
@@ -64,6 +65,15 @@ for comment in user.get_comments(limit=None):
             #print (random.choice(general_responses))
 print (final_name)
 print (username)
-for line in fileinput.FileInput("config_bot.py",inplace=1):
-    line = line.replace(username,final_name)
+def inplace_change("stalk.py", username, final_name):
+        s=open(stalk.py).read()
+        if username in s:
+                print ('Changing "{username}" to "{final_name}"'.format(**locals()))
+                s=s.replace(username, final_name)
+                f=open(stalk, 'w')
+                f.write(s)
+                f.flush()
+                f.close()
+        else:
+                print ('No occurances of "{username}" found.'.format(**locals()))
 print (username)
