@@ -20,7 +20,8 @@ r = praw.Reddit(user_agent=user_agent)
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
-user = r.get_redditor('jaxtestingbot')
+username = 'jaxtestingbot'
+user = r.get_redditor(username)
 #list of words
 hotwords = ["/u/"]
 
@@ -47,10 +48,17 @@ for comment in user.get_comments(limit=None):
         #and if that word is in the body of the comment
         if word in comment.body:
             #print the comment body
-            print (comment.body)
+            body = comment.body
+            #gets string "/u/username ....*rest of comment*"
+            new_name = body.split('/u/')[1]
+            #takes the /u/username and takes it and gives back username
+            final_name = new_name.split(' ',1)[0]
+            print (final_name)
             #prints random final response
             print (random.choice(final_responses))
         #otherwise
         else:
-            #print 'nada'
-            print (random.choice(general_responses))
+            print ('nada')
+            #print (random.choice(general_responses))
+            
+         
