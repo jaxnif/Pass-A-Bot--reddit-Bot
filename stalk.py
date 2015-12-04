@@ -4,6 +4,7 @@ import pdb
 import re
 import os
 import time
+import random
 from config_bot import *
 
 # Check that the file that contains our username exists
@@ -25,7 +26,7 @@ hotwords = ["/u/"]
 
 #take responses.txt and turn it into a list
 with open('responses.txt') as f:
-    lines = f.read().splitlines()
+    responses = f.read().splitlines()
 
 #finds the users comments
 user.get_comments(limit=None)
@@ -40,4 +41,4 @@ for comment in user.get_comments(limit=None):
         #otherwise
         else:
             #print 'nada'
-            print ("not a redirect")
+            print (random.choice(responses))
