@@ -19,22 +19,9 @@ r = praw.Reddit(user_agent=user_agent)
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
-#Karma Bot: (uncomment to use)
-    # choose a user
-    #user = r.get_redditor('aamfs94')
-    # printing karma 
-    #print (user.link_karma)
-    #print (user.comment_karma)
-# user to follow
 user = r.get_redditor('jaxtestingbot')
 #list of words
 hotwords = ["/u/"]
-
-##for comment in user.get_comments(limit=None):
-##    if 'hotwords=' in str(comment.body).lower():
-##        print (comment.body)
-##    else:
-##        print ('nothing found')
 
 #finds the users comments
 user.get_comments(limit=None)
