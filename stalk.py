@@ -13,7 +13,7 @@ if not os.path.isfile("config_bot.py"):
     exit(1)
 
 # Create the Reddit instance
-user_agent = ("PassABot v.3")
+user_agent = ("PassABot v.4")
 r = praw.Reddit(user_agent=user_agent)
 
 # and login
@@ -49,7 +49,7 @@ for comment in user.get_comments(limit=None):
         #otherwise
         else:
             #print 'nada'
-            print ("nada")
+            print ("not a redirect")
 time.sleep(5)
 
 
