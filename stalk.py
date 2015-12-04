@@ -25,9 +25,19 @@ user = r.get_redditor('jaxtestingbot')
 hotwords = ["/u/"]
 
 #take responses.txt and turn it into a list
-with open('responses.txt') as f:
-    responses = f.read().splitlines()
+with open('general_responses.txt') as f:
+    general_responses = f.read().splitlines()
+    
+with open('cat_responses.txt') as f:
+    cat_responses = f.read().splitlines()
+    
+with open('dog_responses.txt') as f:
+    cat_responses = f.read().splitlines()
 
+#list of responses should the bot be passed on
+with open('final_responses.txt') as f:
+    final_responses = f.read().splitlines()
+    
 #finds the users comments
 user.get_comments(limit=None)
 #for comment in users comments that
@@ -38,7 +48,9 @@ for comment in user.get_comments(limit=None):
         if word in comment.body:
             #print the comment body
             print (comment.body)
+            #prints random final response
+            print (random.choice(final_responses))
         #otherwise
         else:
             #print 'nada'
-            print (random.choice(responses))
+            print (random.choice(general_responses))
