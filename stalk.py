@@ -23,6 +23,10 @@ user = r.get_redditor('jaxtestingbot')
 #list of words
 hotwords = ["/u/"]
 
+#take responses.txt and turn it into a list
+with open('responses.txt') as f:
+    lines = f.read().splitlines()
+
 #finds the users comments
 user.get_comments(limit=None)
 #for comment in users comments that
@@ -37,6 +41,3 @@ for comment in user.get_comments(limit=None):
         else:
             #print 'nada'
             print ("not a redirect")
-time.sleep(5)
-
-
