@@ -9,6 +9,7 @@ import string
 import fileinput
 from config_bot import *
 
+
 # Check that the file that contains our username exists
 if not os.path.isfile("config_bot.py"):
     print ("You must create a config file with your username and password.")
@@ -23,7 +24,8 @@ r = praw.Reddit(user_agent=user_agent)
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
-username = 'jaxtestingbot'
+with open ('username.txt', 'r') as myfile:
+    username=myfile.read()
 final_name = ''
 user = r.get_redditor(username)
 #list of words
@@ -72,6 +74,10 @@ for comment in user.get_comments(limit=None):
         if word in comment.body:
             #switch to comment.reply for deployment
             print (random.choice(dog_responses))
-
-username = username.replace(username,final_name)
+print (username)
+print (final_name)
+myfile.write(final_name)
+with open ('username.txt', 'w') as myfile:
+    username=myfile.read()
+print (username)
 
