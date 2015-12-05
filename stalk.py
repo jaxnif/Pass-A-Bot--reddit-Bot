@@ -76,8 +76,8 @@ for comment in user.get_comments(limit=None):
             print (random.choice(dog_responses))
 print (username)
 print (final_name)
-myfile.write(final_name)
+
 with open ('username.txt', 'w') as myfile:
-    username=myfile.read()
+    myfile.write(final_name)
 print (username)
 
