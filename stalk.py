@@ -73,7 +73,5 @@ for comment in user.get_comments(limit=None):
             #switch to comment.reply for deployment
             print (random.choice(dog_responses))
 
-print (final_name)
-print (username)
 username = username.replace(username,final_name)
-print (username)
+
