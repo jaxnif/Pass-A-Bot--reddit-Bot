@@ -27,6 +27,8 @@ username = 'jaxtestingbot'
 user = r.get_redditor(username)
 #list of words
 hotwords = ["/u/"]
+hotcats = ['cat', 'cats', 'kitten']
+hotdogs = ['dog', 'dogs', 'puppy', 'husky']
 print (username)
 #take responses.txt and turn it into a list
 with open('general_responses.txt') as f:
@@ -36,7 +38,7 @@ with open('cat_responses.txt') as f:
     cat_responses = f.read().splitlines()
     
 with open('dog_responses.txt') as f:
-    cat_responses = f.read().splitlines()
+    dog_responses = f.read().splitlines()
 
 #list of responses should the bot be passed on
 with open('final_responses.txt') as f:
@@ -58,9 +60,16 @@ for comment in user.get_comments(limit=None):
             final_name = new_name.split(' ',1)[0]
             print (final_name)
             #prints random final response
+            #switch to comment.reply for deployment
             print (random.choice(final_responses))
         #otherwise
-        else:
-            print ('nada')
-            #print (random.choice(general_responses))
+    for word in hotcats:
+        if word in comment.body:
+            #switch to comment.reply for deployment
+            print (random.choice(cat_responses))
+    for word in hotdogs:
+        if word in comment.body:
+            #switch to comment.reply for deployment
+            print (random.choice(dog_responses))
+            
 username = final_name
