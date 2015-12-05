@@ -24,6 +24,7 @@ r = praw.Reddit(user_agent=user_agent)
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
 username = 'jaxtestingbot'
+final_name = ''
 user = r.get_redditor(username)
 #list of words
 hotwords = ["/u/"]
@@ -71,5 +72,8 @@ for comment in user.get_comments(limit=None):
         if word in comment.body:
             #switch to comment.reply for deployment
             print (random.choice(dog_responses))
-            
-username = final_name
+
+print (final_name)
+print (username)
+username = username.replace(username,final_name)
+print (username)
