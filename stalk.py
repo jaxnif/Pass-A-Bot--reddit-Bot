@@ -79,5 +79,7 @@ print (final_name)
 
 with open ('username.txt', 'w') as myfile:
     myfile.write(final_name)
+with open ('username.txt', 'w') as myfile:
+    username=myfile.read()
 print (username)
 
