@@ -53,9 +53,10 @@ for comment in comments:
             #isolate the comment body
             body = comment.body
             #gets string "/u/username ....*rest of comment*"
-            new_name = body.split('/u/')[1]
+            final_name = body.split('/u/')[0]
+            print (final_name)
             #takes the /u/username and takes it and gives back username
-            final_name = new_name.split('',1)[0]
+            #final_name = new_name.split(' ',1)[0]
             #print (final_name)
             #prints random final response
             #switch to comment.reply for deployment
