@@ -22,30 +22,34 @@ with open("replied_to.txt", "r") as f:
 final_name = ''
 user = r.get_redditor(username)
 #list of words
-hotwords = "/u/"
+hotword = "/u/"
 hotcats = ['cat', 'cats', 'kitten']
 hotdogs = ['dog', 'dogs', 'puppy', 'husky']
 
+# with open('general_responses.txt') as f:
+#     general_responses = f.read().splitlines()
+#
+# with open('cat_responses.txt') as f:
+#     cat_responses = f.read().splitlines()
+#
+# with open('dog_responses.txt') as f:
+#     dog_responses = f.read().splitlines()
+#
+# with open('final_responses.txt') as f:
+#     final_responses = f.read().splitlines()
 
+final_files = ['general_responses.txt', 'cat_responses.txt', 'dog_responses.txt', 'final_responses.txt']
+responses = {}
+for word in final_files:
+    with open(word) as f:
+        word = word[:-4]
+        responses[word] = f.read().splitlines()
 
-print (username)
-#take responses.txt and turn it into a list
-with open('general_responses.txt') as f:
-    general_responses = f.read().splitlines()
-
-with open('cat_responses.txt') as f:
-    cat_responses = f.read().splitlines()
-
-with open('dog_responses.txt') as f:
-    dog_responses = f.read().splitlines()
-
-#list of responses should the bot be passed on
-with open('final_responses.txt') as f:
-    final_responses = f.read().splitlines()
+print (responses['cat_responses'])
 
 comments = user.get_comments(sort='old', time='day', limit=None)
 for comment in comments:
-    if hotwords in comment.body and comment.id not in replied_to:
+    if hotword in comment.body and comment.id not in replied_to:
         replied_to.append(comment.id)
         print('finalresponse')
     for word in hotcats:
