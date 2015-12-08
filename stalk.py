@@ -30,14 +30,22 @@ hotdogs = ['dog', 'dogs', 'puppy', 'husky']
 
 print (username)
 #take responses.txt and turn it into a list
-with open('general_responses.txt') as f:
-    general_responses = f.read().splitlines()
-    
-with open('cat_responses.txt') as f:
-    cat_responses = f.read().splitlines()
-    
-with open('dog_responses.txt') as f:
-    dog_responses = f.read().splitlines()
+hot_lists = ['general', 'cat', 'dog']
+for word in hot_lists:
+    final_word = word + '_responses'
+    final_file = final_word + '.txt'
+    with open(final_file) as f:
+        final_word = f.read().splitlines()
+
+
+# with open('general_responses.txt') as f:
+#     general_responses = f.read().splitlines()
+
+# with open('cat_responses.txt') as f:
+#     cat_responses = f.read().splitlines()
+#
+# with open('dog_responses.txt') as f:
+#     dog_responses = f.read().splitlines()
 
 #list of responses should the bot be passed on
 with open('final_responses.txt') as f:
