@@ -30,15 +30,14 @@ hotdogs = ['dog', 'dogs', 'puppy', 'husky']
 
 print (username)
 #take responses.txt and turn it into a list
-hot_lists = ['general', 'cat', 'dog']
-for word in hot_lists:
-    final_word = word + '_responses'
-    final_file = final_word + '.txt'
-    with open(final_file) as f:
-        final_list = final_file[:-4]
-        final_word = f.read().splitlines()
+final_files = ['general_responses.txt', 'cat_responses.txt', 'dog_responses.txt']
+for word in final_files:
+    with open(word) as f:
+        word = word[:-4]
+        word = f.read().splitlines()
 
-print (cat_responses)
+print (general_responses)
+
 
 # with open('general_responses.txt') as f:
 #     general_responses = f.read().splitlines()
