@@ -5,13 +5,6 @@ import random
 from config_bot import *
 
 
-# Check that the file that contains our username exists
-if not os.path.isfile("config_bot.py"):
-    print ("You must create a config file with your username and password.")
-    print ("Please see config_skel.py")
-    exit(1)
-
-
 # Create the Reddit instance
 user_agent = ("PassABot v.4")
 r = praw.Reddit(user_agent=user_agent)
@@ -19,14 +12,22 @@ r = praw.Reddit(user_agent=user_agent)
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
 
-with open ('username.txt', 'r') as myfile:
+with open ("username.txt", "r") as myfile:
     username=myfile.read()
+
+with open("replied_to.txt", "r") as f:
+    replied_to = f.read().splitlines()
+
+
 final_name = ''
 user = r.get_redditor(username)
 #list of words
-hotwords = ["/u/"]
+hotwords = "/u/"
 hotcats = ['cat', 'cats', 'kitten']
 hotdogs = ['dog', 'dogs', 'puppy', 'husky']
+
+
+
 print (username)
 #take responses.txt and turn it into a list
 with open('general_responses.txt') as f:
@@ -41,39 +42,21 @@ with open('dog_responses.txt') as f:
 #list of responses should the bot be passed on
 with open('final_responses.txt') as f:
     final_responses = f.read().splitlines()
-    
-#finds the users comments
+
 comments = user.get_comments(sort='old', time='day', limit=None)
-#for comment in users comments that
 for comment in comments:
-    #contain a word from the list hotwords
-    for word in hotwords:
-        #and if that word is in the body of the comment
-        if word in comment.body:
-            #isolate the comment body
-            body = comment.body
-            #gets string "/u/username ....*rest of comment*"
-            final_name = body.split('/u/')[0]
-            print (final_name)
-            #takes the /u/username and takes it and gives back username
-            #final_name = new_name.split(' ',1)[0]
-            #print (final_name)
-            #prints random final response
-            #switch to comment.reply for deployment
-            comment.reply(random.choice(final_responses) + ' ' + '/n' + 'Thank you for using the bot! the bot is now passed on to:' + ' ' + final_name)
-            with open ('username.txt', 'w') as myfile:
-                myfile.write(final_name)
-            with open ('username.txt', 'r') as myfile:
-                username = myfile.read()
-            quit()
-    #otherwise do these
+    if hotwords in comment.body and comment.id not in replied_to:
+        replied_to.append(comment.id)
+        print('finalresponse')
     for word in hotcats:
-        if word in comment.body:
-            #switch to comment.reply for deployment
-            comment.reply(random.choice(cat_responses))
+        if word in comment.body and comment.id not in replied_to:
+            replied_to.append(comment.id)
+            print('testcat')
     for word in hotdogs:
-        if word in comment.body:
-            #switch to comment.reply for deployment
-            comment.reply(random.choice(dog_responses))
+        if word in comment.body and comment.id not in replied_to:
+            replied_to.append(comment.id)
+            print('testcat')
 
-
+with open("replied_to.txt", "w") as f:
+    for comment_id in replied_to:
+        f.write(comment.id + "\n")
