@@ -47,6 +47,7 @@ for comment in comments:
             username = result
             replied_to.append(comment.id)
             print(random.choice(responses['final_responses']))
+            quit()
         for word in hotcats:
             if word in comment.body and comment.id not in replied_to:
                 replied_to.append(comment.id)
