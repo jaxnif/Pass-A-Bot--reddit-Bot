@@ -2,19 +2,23 @@
 import praw
 import random
 import time
-import re
+import string
 from config_bot import *
 
 
 # reddit Stuff:
-user_agent = ("PassABot v.4")
+user_agent = ("PassABot v.7")
 r = praw.Reddit(user_agent=user_agent)
-# and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
-with open ("username.txt", "r") as myfile:
-    username = myfile.read()
+with open ("username.txt", "r") as f:
+    username = f.read()
 user = r.get_redditor(username)
 # end of reddit stuff
+
+with open("previous_time.txt", "r") as f:
+    previous_time = f.read()
+
+previous_time = float(previous_time)
 
 with open("replied_to.txt", "r") as f:
     replied_to = f.read().splitlines()
@@ -39,21 +43,24 @@ comments = user.get_comments(sort='old', time='day', limit=None)
 
 for comment in comments:
     # post has to be 24hours old or newer
-    if current_time - comment.created_utc <= 999999:
+    if comment.created_utc > previous_time:
         if hotword in comment.body and comment.id not in replied_to:
             result = comment.body.split('/u/',1)[1]
             result = result.split('\n',1)[0]
             result = result.split(' ',1)[0]
+            result = "".join(l for l in result if l not in string.punctuation)
             username = result
-            print (username)
+            comment.reply(username + ' is the new target')
             replied_to.append(comment.id)
-            print(random.choice(responses['final_responses']))
+            comment.reply(random.choice(responses['final_responses']))
             if result not in blacklist:
                 with open("replied_to.txt", "w") as f:
                     for comment.id in replied_to:
                         f.write(comment.id + "\n")
                 with open("username.txt", "w") as f:
                     f.write(username)
+                with open("previous_time.txt", "w") as f:
+                    f.write(str(comment.created_utc))
                 quit()
         for word in hotcats:
             if word in comment.body and comment.id not in replied_to:
@@ -69,3 +76,5 @@ with open("replied_to.txt", "w") as f:
         f.write(comment.id + "\n")
 with open("username.txt", "w") as f:
     f.write(username)
+
+quit()
