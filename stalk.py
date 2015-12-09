@@ -41,9 +41,9 @@ for comment in comments:
     if current_time - comment.created_utc <= 999999:
         if hotword in comment.body and comment.id not in replied_to:
             result = comment.body.split('/u/',1)[1]
-            result2 = result.split('\n',1)[0]
-            result3 = result2.split(' ',1)[0]
-            print (result3)
+            result = result.split('\n',1)[0]
+            result = result.split(' ',1)[0]
+            print (result)
             replied_to.append(comment.id)
             print(random.choice(responses['final_responses']))
         for word in hotcats:
