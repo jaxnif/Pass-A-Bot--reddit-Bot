@@ -40,8 +40,10 @@ for comment in comments:
     # post has to be 24hours old or newer
     if current_time - comment.created_utc <= 999999:
         if hotword in comment.body and comment.id not in replied_to:
-            result = re.search('/u/;(.*) ', comment.body)
-            print (result.group(1))
+            result = comment.body.split('/u/',1)[1]
+            result2 = result.split('\n',1)[0]
+            result3 = result2.split(' ',1)[0]
+            print (result3)
             replied_to.append(comment.id)
             print(random.choice(responses['final_responses']))
         for word in hotcats:
