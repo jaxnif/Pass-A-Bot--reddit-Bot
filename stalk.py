@@ -18,7 +18,6 @@ with open ("username.txt", "r") as myfile:
 with open("replied_to.txt", "r") as f:
     replied_to = f.read().splitlines()
 
-
 user = r.get_redditor(username)
 #list of words
 hotword = "/u/"
@@ -31,6 +30,7 @@ for word in final_files:
     with open(word) as f:
         word = word[:-4]
         responses[word] = f.read().splitlines()
+
 
 
 comments = user.get_comments(sort='old', time='day', limit=None)
@@ -48,5 +48,5 @@ for comment in comments:
             print(random.choice(responses['dog_responses']))
 
 with open("replied_to.txt", "w") as f:
-    for comment_id in replied_to:
+    for comment.id in replied_to:
         f.write(comment.id + "\n")
