@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd0f1ca1-827b-49e3-9b5e-79ea87a8d542" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stalk.py" afterPath="$PROJECT_DIR$/stalk.py" />
-    </list>
+    <list default="true" id="dd0f1ca1-827b-49e3-9b5e-79ea87a8d542" name="Default" comment="" />
     <ignored path="Pass-A-Bot--reddit-Bot.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
