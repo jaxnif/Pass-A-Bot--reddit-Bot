@@ -44,6 +44,7 @@ for comment in comments:
             result = result.split('\n',1)[0]
             result = result.split(' ',1)[0]
             print (result)
+            username = result
             replied_to.append(comment.id)
             print(random.choice(responses['final_responses']))
         for word in hotcats:
@@ -58,3 +59,5 @@ for comment in comments:
 with open("replied_to.txt", "w") as f:
     for comment.id in replied_to:
         f.write(comment.id + "\n")
+with open("username.txt", "w") as f:
+    f.write(username)
