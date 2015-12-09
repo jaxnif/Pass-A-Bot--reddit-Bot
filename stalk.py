@@ -5,7 +5,6 @@ import time
 import string
 from config_bot import *
 
-
 # reddit Stuff:
 user_agent = ("PassABot v.7")
 r = praw.Reddit(user_agent=user_agent)
@@ -23,7 +22,6 @@ previous_time = float(previous_time)
 with open("replied_to.txt", "r") as f:
     replied_to = f.read().splitlines()
 
-
 #list of words
 hotword = "/u/"
 hotcats = ['cat', 'cats', 'kitten']
@@ -39,10 +37,9 @@ for word in final_files:
 
 current_time = time.time()
 
-comments = user.get_comments(sort='old', time='day', limit=None)
+comments = user.get_comments(sort='old', time='all', limit=None)
 
 for comment in comments:
-    # post has to be 24hours old or newer
     if comment.created_utc > previous_time:
         if hotword in comment.body and comment.id not in replied_to:
             result = comment.body.split('/u/',1)[1]
