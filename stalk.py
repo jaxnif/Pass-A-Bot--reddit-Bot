@@ -5,20 +5,20 @@ import random
 from config_bot import *
 
 
-# Create the Reddit instance
+# reddit Stuff:
 user_agent = ("PassABot v.4")
 r = praw.Reddit(user_agent=user_agent)
-
 # and login
 r.login(REDDIT_USERNAME, REDDIT_PASSWORD)
-
 with open ("username.txt", "r") as myfile:
-    username=myfile.read()
+    username = myfile.read()
+user = r.get_redditor(username)
+# end of reddit stuff
 
 with open("replied_to.txt", "r") as f:
     replied_to = f.read().splitlines()
 
-user = r.get_redditor(username)
+
 #list of words
 hotword = "/u/"
 hotcats = ['cat', 'cats', 'kitten']
@@ -30,8 +30,6 @@ for word in final_files:
     with open(word) as f:
         word = word[:-4]
         responses[word] = f.read().splitlines()
-
-
 
 comments = user.get_comments(sort='old', time='day', limit=None)
 for comment in comments:
