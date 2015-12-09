@@ -2,6 +2,7 @@
 import praw
 import random
 import time
+import re
 from config_bot import *
 
 
@@ -37,8 +38,10 @@ comments = user.get_comments(sort='old', time='day', limit=None)
 
 for comment in comments:
     # post has to be 24hours old or newer
-    if current_time - comment.created_utc <= 86400:
+    if current_time - comment.created_utc <= 999999:
         if hotword in comment.body and comment.id not in replied_to:
+            result = re.search('/u/;(.*) ', comment.body)
+            print (result.group(1))
             replied_to.append(comment.id)
             print(random.choice(responses['final_responses']))
         for word in hotcats:
