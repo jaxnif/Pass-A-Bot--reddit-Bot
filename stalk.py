@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import praw
-import os
 import random
+import time
 from config_bot import *
 
 
@@ -31,19 +31,24 @@ for word in final_files:
         word = word[:-4]
         responses[word] = f.read().splitlines()
 
+current_time = time.time()
+
 comments = user.get_comments(sort='old', time='day', limit=None)
+
 for comment in comments:
-    if hotword in comment.body and comment.id not in replied_to:
-        replied_to.append(comment.id)
-        print(random.choice(responses['final_responses']))
-    for word in hotcats:
-        if word in comment.body and comment.id not in replied_to:
+    # post has to be 24hours old or newer
+    if current_time - comment.created_utc <= 86400:
+        if hotword in comment.body and comment.id not in replied_to:
             replied_to.append(comment.id)
-            print(random.choice(responses['cat_responses']))
-    for word in hotdogs:
-        if word in comment.body and comment.id not in replied_to:
-            replied_to.append(comment.id)
-            print(random.choice(responses['dog_responses']))
+            print(random.choice(responses['final_responses']))
+        for word in hotcats:
+            if word in comment.body and comment.id not in replied_to:
+                replied_to.append(comment.id)
+                print(random.choice(responses['cat_responses']))
+        for word in hotdogs:
+            if word in comment.body and comment.id not in replied_to:
+                replied_to.append(comment.id)
+                print(random.choice(responses['dog_responses']))
 
 with open("replied_to.txt", "w") as f:
     for comment.id in replied_to:
