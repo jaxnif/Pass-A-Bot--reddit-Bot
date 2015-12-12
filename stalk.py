@@ -27,6 +27,7 @@ hotword = "/u/"
 hotcats = ['cat', 'cats', 'kitten']
 hotdogs = ['dog', 'dogs', 'puppy', 'husky']
 
+
 blacklist = [' ', 'jaxtestingbot']
 final_files = ['general_responses.txt', 'cat_responses.txt', 'dog_responses.txt', 'final_responses.txt']
 responses = {}
@@ -62,11 +63,15 @@ for comment in comments:
         for word in hotcats:
             if word in comment.body and comment.id not in replied_to:
                 replied_to.append(comment.id)
-                print(random.choice(responses['cat_responses']))
+                comment.reply(random.choice(responses['cat_responses']))
         for word in hotdogs:
             if word in comment.body and comment.id not in replied_to:
                 replied_to.append(comment.id)
-                print(random.choice(responses['dog_responses']))
+                comment.reply(random.choice(responses['dog_responses']))
+        else:
+            if comment.id not in replied_to:
+                replied_to.append(comment.id)
+                comment.reply(random.choice(responses['general_responses']))
 
 with open("replied_to.txt", "w") as f:
     for comment.id in replied_to:
